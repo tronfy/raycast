@@ -1,12 +1,17 @@
-#include "raycast.h"
+#include "tray.h"
 
 int main() {
+  srand(time(NULL));
+  generate_map();
+
   LARGE_INTEGER frequency, time, oldTime;
   QueryPerformanceFrequency(&frequency);
   QueryPerformanceCounter(&oldTime);
 
   Player player;
-  init_player(&player);
+  int startX, startY;
+  get_random_empty_position(&startX, &startY);
+  init_player(&player, startX + 0.5, startY + 0.5);
   init_renderer();
 
   // game loop

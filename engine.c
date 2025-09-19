@@ -1,9 +1,10 @@
-#include "raycast.h"
+#include "tray.h"
 
 // pre-compute screen constants
 double invScreenWidth = 2.0 / SCREEN_WIDTH;
 double halfScreenHeight = SCREEN_HEIGHT / 2.0;
 
+// https://lodev.org/cgtutor/raycasting.html
 void cast_ray(int x, Player *player, RayResult *result) {
   double cameraX = x * invScreenWidth - 1.0;
   double rayDirX = player->dirX + player->planeX * cameraX;

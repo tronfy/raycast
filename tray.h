@@ -1,5 +1,5 @@
-#ifndef RAYCAST_H
-#define RAYCAST_H
+#ifndef TRAY_H
+#define TRAY_H
 
 #include <math.h>
 #include <stdio.h>
@@ -7,11 +7,15 @@
 #include <time.h>
 #include <windows.h>
 
-#define MAP_WIDTH 10
-#define MAP_HEIGHT 10
+#define MAP_WIDTH 60
+#define MAP_HEIGHT 30
 
-#define SCREEN_WIDTH 160
-#define SCREEN_HEIGHT 20
+#define ROOM_ATTEMPTS 300
+#define ROOM_MIN_SIZE 3
+#define ROOM_MAX_SIZE 6
+
+#define SCREEN_WIDTH 120
+#define SCREEN_HEIGHT 40
 
 #define FPS_LIMIT 144
 
@@ -52,6 +56,11 @@ char get_depth_char(double distance);
 void handle_input(Player *player, double moveSpeed, double rotSpeed);
 void move_player(Player *player, double deltaX, double deltaY);
 void rotate_player(Player *player, double rotSpeed);
-void init_player(Player *player);
+void init_player(Player *player, double startX, double startY);
 
-#endif // RAYCAST_H
+// map
+void display_map();
+void generate_map();
+void get_random_empty_position(int *x, int *y);
+
+#endif // TRAY_H

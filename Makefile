@@ -1,10 +1,10 @@
 CC = gcc
 CFLAGS = -O3 -march=native -mtune=native -ffast-math -Wall -Wextra -std=c99
 LDFLAGS = -lm
-TARGET = raycast.exe
+TARGET = tray.exe
 SOURCES = main.c engine.c renderer.c input.c map.c
 OBJECTS = $(SOURCES:.c=.o)
-HEADERS = raycast.h
+HEADERS = tray.h
 
 all: $(TARGET)
 

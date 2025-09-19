@@ -1,4 +1,4 @@
-#include "raycast.h"
+#include "tray.h"
 
 void handle_input(Player *player, double moveSpeed, double rotSpeed) {
   // forward/backward
@@ -38,9 +38,9 @@ void rotate_player(Player *player, double rotSpeed) {
   player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
 }
 
-void init_player(Player *player) {
-  player->posX = 1.5;
-  player->posY = 1.5;
+void init_player(Player *player, double startX, double startY) {
+  player->posX = startX;
+  player->posY = startY;
   player->dirX = 1.0;
   player->dirY = 0.0;
   player->planeX = 0.0;

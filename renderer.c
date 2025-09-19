@@ -1,4 +1,4 @@
-#include "raycast.h"
+#include "tray.h"
 
 char screen[SCREEN_HEIGHT][SCREEN_WIDTH + 1];
 char prevScreen[SCREEN_HEIGHT][SCREEN_WIDTH + 1];
