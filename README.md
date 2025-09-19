@@ -1,6 +1,6 @@
 # tray
 
-untextured ascii raycasting engine with procedural map generation
+ascii raycasting engine with procedural map generation
 
 ## references
 
