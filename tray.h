@@ -1,11 +1,20 @@
 #ifndef TRAY_H
 #define TRAY_H
 
+#define _DEFAULT_SOURCE // usleep
+
+#include <errno.h>
+#include <fcntl.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <sys/time.h>
+#include <termios.h>
 #include <time.h>
-#include <windows.h>
+#include <unistd.h>
+
+#define INPUT_DEVICE "/dev/input/event6"
 
 #define MAP_WIDTH 60
 #define MAP_HEIGHT 30
@@ -15,7 +24,7 @@
 #define ROOM_MAX_SIZE 6
 
 #define SCREEN_WIDTH 120
-#define SCREEN_HEIGHT 40
+#define SCREEN_HEIGHT 30
 
 #define FPS_LIMIT 144
 
@@ -41,7 +50,7 @@ extern double halfScreenHeight;
 // engine
 void cast_ray(int x, Player *player, RayResult *result);
 void update_game(Player *player, double frameTime);
-double get_frame_time(LARGE_INTEGER *frequency, LARGE_INTEGER *oldTime, LARGE_INTEGER *time);
+double get_frame_time(struct timeval *oldTime, struct timeval *time);
 
 // renderer
 void init_screen(void);
@@ -57,6 +66,8 @@ void handle_input(Player *player, double moveSpeed, double rotSpeed);
 void move_player(Player *player, double deltaX, double deltaY);
 void rotate_player(Player *player, double rotSpeed);
 void init_player(Player *player, double startX, double startY);
+void init_input(void);
+void cleanup_input(void);
 
 // map
 void display_map();

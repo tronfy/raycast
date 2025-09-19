@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -O3 -march=native -mtune=native -ffast-math -Wall -Wextra -std=c99
 LDFLAGS = -lm
-TARGET = tray.exe
+TARGET = tray.x
 SOURCES = main.c engine.c renderer.c input.c map.c
 OBJECTS = $(SOURCES:.c=.o)
 HEADERS = tray.h
@@ -15,10 +15,10 @@ $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	del /f *.o $(TARGET) 2>nul || true
+	rm -f *.o $(TARGET)
 
 run: $(TARGET)
-	.\$(TARGET)
+	./$(TARGET)
 
 debug: CFLAGS += -g -DDEBUG
 debug: $(TARGET)

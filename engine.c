@@ -75,14 +75,16 @@ void cast_ray(int x, Player *player, RayResult *result) {
 }
 
 void update_game(Player *player, double frameTime) {
-  double moveSpeed = frameTime * 2.5;
-  double rotSpeed = frameTime * 2.0;
+  double moveSpeed = frameTime * 4;
+  double rotSpeed = frameTime * 3.0;
 
   handle_input(player, moveSpeed, rotSpeed);
 }
 
-double get_frame_time(LARGE_INTEGER *frequency, LARGE_INTEGER *oldTime, LARGE_INTEGER *time) {
+double get_frame_time(struct timeval *oldTime, struct timeval *time) {
   *oldTime = *time;
-  QueryPerformanceCounter(time);
-  return (double)(time->QuadPart - oldTime->QuadPart) / frequency->QuadPart;
+  gettimeofday(time, NULL);
+  double diff = (time->tv_sec - oldTime->tv_sec) +
+                (time->tv_usec - oldTime->tv_usec) / 1000000.0;
+  return diff;
 }

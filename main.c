@@ -1,22 +1,24 @@
 #include "tray.h"
 
 int main() {
+  printf("\033[?25l"); // hide cursor
+
   srand(time(NULL));
   generate_map();
 
-  LARGE_INTEGER frequency, time, oldTime;
-  QueryPerformanceFrequency(&frequency);
-  QueryPerformanceCounter(&oldTime);
+  struct timeval time, oldTime;
+  gettimeofday(&oldTime, NULL);
 
   Player player;
   int startX, startY;
   get_random_empty_position(&startX, &startY);
   init_player(&player, startX + 0.5, startY + 0.5);
   init_renderer();
+  init_input();
 
   // game loop
   while (1) {
-    double frameTime = get_frame_time(&frequency, &oldTime, &time);
+    double frameTime = get_frame_time(&oldTime, &time);
 
     clear_screen_buffer();
 
@@ -34,13 +36,14 @@ int main() {
     // cap frame rate
     double targetFrameTime = 1.0 / FPS_LIMIT;
     if (frameTime < targetFrameTime) {
-      Sleep((DWORD)((targetFrameTime - frameTime) * 1000));
-      QueryPerformanceCounter(&oldTime);
+      gettimeofday(&oldTime, NULL);
+      usleep((unsigned int)((targetFrameTime - frameTime) * 1000000));
     } else {
       oldTime = time;
-      QueryPerformanceCounter(&oldTime);
+      gettimeofday(&oldTime, NULL);
     }
   }
 
+  cleanup_input();
   return 0;
 }

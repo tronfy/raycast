@@ -1,3 +1,4 @@
+// filepath: map.c
 #include "tray.h"
 
 #define rand_range(min, max) (rand() % ((max) - (min) + 1) + (min))
@@ -110,7 +111,7 @@ void generate_map() {
         }
       }
       display_map();
-      Sleep(100);
+      usleep(25 * 1000);
     }
   }
 
