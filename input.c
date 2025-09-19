@@ -2,44 +2,30 @@
 
 void handle_input(Player *player, double moveSpeed, double rotSpeed) {
   // forward/backward
-  if (GetAsyncKeyState('W') & 0x8000) {
-    if (map[(int)(player->posX + player->dirX * moveSpeed)][(int)player->posY] == 0)
-      player->posX += player->dirX * moveSpeed;
-    if (map[(int)player->posX][(int)(player->posY + player->dirY * moveSpeed)] == 0)
-      player->posY += player->dirY * moveSpeed;
-  }
-  if (GetAsyncKeyState('S') & 0x8000) {
-    if (map[(int)(player->posX - player->dirX * moveSpeed)][(int)player->posY] == 0)
-      player->posX -= player->dirX * moveSpeed;
-    if (map[(int)player->posX][(int)(player->posY - player->dirY * moveSpeed)] == 0)
-      player->posY -= player->dirY * moveSpeed;
-  }
+  if (GetAsyncKeyState('W') & 0x8000)
+    move_player(player, player->dirX * moveSpeed, player->dirY * moveSpeed);
+  if (GetAsyncKeyState('S') & 0x8000)
+    move_player(player, -player->dirX * moveSpeed, -player->dirY * moveSpeed);
 
   // rotation
-  if (GetAsyncKeyState('D') & 0x8000) {
+  if (GetAsyncKeyState('D') & 0x8000)
     rotate_player(player, rotSpeed);
-  }
-  if (GetAsyncKeyState('A') & 0x8000) {
+  if (GetAsyncKeyState('A') & 0x8000)
     rotate_player(player, -rotSpeed);
-  }
 
   // strafing
-  if (GetAsyncKeyState('Q') & 0x8000) {
-    double strafeX = -player->dirY;
-    double strafeY = player->dirX;
-    if (map[(int)(player->posX + strafeX * moveSpeed)][(int)player->posY] == 0)
-      player->posX += strafeX * moveSpeed;
-    if (map[(int)player->posX][(int)(player->posY + strafeY * moveSpeed)] == 0)
-      player->posY += strafeY * moveSpeed;
-  }
-  if (GetAsyncKeyState('E') & 0x8000) {
-    double strafeX = player->dirY;
-    double strafeY = -player->dirX;
-    if (map[(int)(player->posX + strafeX * moveSpeed)][(int)player->posY] == 0)
-      player->posX += strafeX * moveSpeed;
-    if (map[(int)player->posX][(int)(player->posY + strafeY * moveSpeed)] == 0)
-      player->posY += strafeY * moveSpeed;
-  }
+  if (GetAsyncKeyState('Q') & 0x8000)
+    move_player(player, player->dirY * moveSpeed, -player->dirX * moveSpeed);
+  if (GetAsyncKeyState('E') & 0x8000)
+    move_player(player, -player->dirY * moveSpeed, player->dirX * moveSpeed);
+}
+
+void move_player(Player *player, double deltaX, double deltaY) {
+  if (map[(int)(player->posX + deltaX)][(int)player->posY] == 0)
+    player->posX += deltaX;
+
+  if (map[(int)player->posX][(int)(player->posY + deltaY)] == 0)
+    player->posY += deltaY;
 }
 
 void rotate_player(Player *player, double rotSpeed) {

@@ -50,6 +50,7 @@ char get_depth_char(double distance);
 
 // input
 void handle_input(Player *player, double moveSpeed, double rotSpeed);
+void move_player(Player *player, double deltaX, double deltaY);
 void rotate_player(Player *player, double rotSpeed);
 void init_player(Player *player);
 
