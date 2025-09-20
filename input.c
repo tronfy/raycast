@@ -58,15 +58,15 @@ void handle_input(Player *player, double moveSpeed, double rotSpeed) {
     move_player(player, -player->dirX * moveSpeed, -player->dirY * moveSpeed);
 
   // rotation
-  if (keys[KEY_D])
-    rotate_player(player, rotSpeed);
-  if (keys[KEY_A])
+  if (keys[KEY_Q])
     rotate_player(player, -rotSpeed);
+  if (keys[KEY_E])
+    rotate_player(player, rotSpeed);
 
   // strafing
-  if (keys[KEY_Q])
+  if (keys[KEY_A])
     move_player(player, player->dirY * moveSpeed, -player->dirX * moveSpeed);
-  if (keys[KEY_E])
+  if (keys[KEY_D])
     move_player(player, -player->dirY * moveSpeed, player->dirX * moveSpeed);
 }
 
