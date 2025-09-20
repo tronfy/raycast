@@ -6,7 +6,8 @@ int main() {
   srand(time(NULL));
   generate_map();
 
-  struct timeval time, oldTime;
+  struct timeval time,
+      oldTime;
   gettimeofday(&oldTime, NULL);
 
   Player player;

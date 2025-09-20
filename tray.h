@@ -24,7 +24,7 @@
 #define ROOM_MAX_SIZE 6
 
 #define SCREEN_WIDTH 120
-#define SCREEN_HEIGHT 30
+#define SCREEN_HEIGHT 40
 
 #define FPS_LIMIT 144
 

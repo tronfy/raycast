@@ -50,7 +50,7 @@ void cast_ray(int x, Player *player, RayResult *result) {
       mapY += stepY;
       side = 1;
     }
-    if (map[mapX][mapY] > 0)
+    if (map[mapX][mapY] < 0)
       hit = 1;
   }
 
@@ -75,8 +75,8 @@ void cast_ray(int x, Player *player, RayResult *result) {
 }
 
 void update_game(Player *player, double frameTime) {
-  double moveSpeed = frameTime * 4;
-  double rotSpeed = frameTime * 3.0;
+  double moveSpeed = frameTime * 3.0;
+  double rotSpeed = frameTime * 2.0;
 
   handle_input(player, moveSpeed, rotSpeed);
 }
